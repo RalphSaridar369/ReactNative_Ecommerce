@@ -18,10 +18,30 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.ralphs.ecommerce"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./assets/Fonts/OpenSans-Bold.ttf",
+            "./assets/Fonts/OpenSans-Italic.ttf",
+            "./assets/Fonts/OpenSans-Medium.ttf",
+            "./assets/Fonts/OpenSans-Regular.ttf",
+            "./assets/Fonts/ProximaNova-Light.ttf"
+          ]
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "f495dbbe-d1bd-4656-add9-9932ef9832ae"
+      }
     }
   }
 }

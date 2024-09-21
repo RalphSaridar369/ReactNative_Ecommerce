@@ -1,0 +1,13 @@
+export { TextInputComponent as TextInput } from "./TextInput";
+export { PassInputComponent as PassInput } from "./TextInput";
+export { default as Alert } from "./Alert";
+export { default as ScrollView } from "./ScrollView";
+export { Normal as NormalPicker } from "./Pickers";
+export { default as KeyboardAvoidingView } from "./KeyboardAvoidingView";
+export { default as HeaderText } from "./HeaderText";
+export { default as Text } from "./Text";
+export { default as TouchableOpacity } from "./TouchableOpacity";
+export { default as DocumentPicker } from "./DocumentPicker";
+export { default as RadioButton } from "./RadioButtonGroup";
+export { default as Link } from "./Link";
+export { default as CheckBox } from "./Checkbox";
