@@ -1,13 +1,11 @@
 import { Text, TouchableOpacity, StyleSheet } from "react-native";
-import { MainContext } from "../reducer/MainContext";
-import { useContext } from "react";
 import { AppStyles } from "../../AppStyle";
+import useTheme from "../helpers/useTheme";
 
 const TouchableOpacityComponent = (props) => {
   const chosenStyles = props.settings.map((item) => styles[item]);
 
-  const { state } = useContext(MainContext);
-  const currentTheme = state.theme;
+  const currentTheme = useTheme();
 
   return (
     <TouchableOpacity

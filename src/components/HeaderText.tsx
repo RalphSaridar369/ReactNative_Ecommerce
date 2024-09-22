@@ -1,10 +1,9 @@
 import { StyleSheet, Text, Platform } from "react-native";
-import React, { useContext } from "react";
-import { MainContext } from "../reducer/MainContext";
+import React from "react";
+import useTheme from "../helpers/useTheme";
 
 const HeaderText = (props) => {
-  const { state } = useContext(MainContext);
-  const currentTheme = state.theme;
+  const currentTheme = useTheme();
 
   return (
     <Text

@@ -1,4 +1,4 @@
-import React, { memo, useState, useRef, useCallback, useContext } from "react";
+import React, { memo, useState, useRef, useCallback } from "react";
 import { View, TouchableOpacity, FlatList, Image } from "react-native";
 import { brands, categories, products } from "../../../mockData";
 import Header from "./components/Header";
@@ -8,12 +8,11 @@ import { HeaderText, Text } from "../../../components";
 import { Normal } from "../../../components/Pickers";
 import { useFocusEffect } from "@react-navigation/native";
 import { AntDesign } from "@expo/vector-icons";
-import { MainContext } from "../../../reducer/MainContext";
 import { AppStyles } from "../../../../AppStyle";
+import useTheme from "../../../helpers/useTheme";
 
 const Products = (props) => {
-  const { state } = useContext(MainContext);
-  const currentTheme = state.theme;
+  const currentTheme = useTheme();
 
   const filterRef = useRef<any>(null);
   const sortRef = useRef<any>(null);

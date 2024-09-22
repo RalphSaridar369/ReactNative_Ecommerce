@@ -1,14 +1,13 @@
-import React, { useContext } from "react";
+import React from "react";
 import { View, ScrollView } from "react-native";
 import { carouselData, flatList1, flatList2, flatList3 } from "../../mockData";
 import FlatlistComponent from "./components/Flatlist";
 import CarouselComponent from "./components/Carousel";
-import { MainContext } from "../../reducer/MainContext";
 import { AppStyles } from "../../../AppStyle";
+import useTheme from "../../helpers/useTheme";
 
 const Home = ({ navigation }) => {
-  const { state } = useContext(MainContext);
-  const currentTheme = state.theme;
+  const currentTheme = useTheme();
 
   return (
     <View

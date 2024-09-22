@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { View, ScrollView, Alert } from "react-native";
 import { formValidator } from "../../../helpers/formValidator";
 import {
@@ -13,12 +13,11 @@ import { styles } from "./Styles";
 import { useFocusEffect } from "@react-navigation/native";
 import { brands, categories } from "../../../mockData";
 import { documentBlobConverter } from "../../../helpers/blobConverter";
-import { MainContext } from "../../../reducer/MainContext";
 import { AppStyles } from "../../../../AppStyle";
+import useTheme from "../../../helpers/useTheme";
 
 const Register = ({ navigation }) => {
-  const { state } = useContext(MainContext);
-  const currentTheme = state.theme;
+  const currentTheme = useTheme();
 
   const [userCred, setUserCred] = useState({
     email: "",

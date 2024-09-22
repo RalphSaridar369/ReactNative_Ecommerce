@@ -1,10 +1,8 @@
 import { Text, TouchableOpacity, StyleSheet } from "react-native";
-import { MainContext } from "../reducer/MainContext";
-import { useContext } from "react";
+import useTheme from "../helpers/useTheme";
 
 const LinkComponent = (props) => {
-  const { state } = useContext(MainContext);
-  const currentTheme = state.theme;
+  const currentTheme = useTheme();
 
   const chosenStyles = props.settings.map((item) => styles[item]);
   return (

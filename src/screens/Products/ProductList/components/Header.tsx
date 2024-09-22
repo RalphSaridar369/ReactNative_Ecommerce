@@ -6,14 +6,12 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { AntDesign, FontAwesome } from "@expo/vector-icons";
-import { useContext } from "react";
-import { MainContext } from "../../../../reducer/MainContext";
 import { AppStyles } from "../../../../../AppStyle";
+import useTheme from "../../../../helpers/useTheme";
 
 const screenWidth = Dimensions.get("screen").width;
 const Header = (props) => {
-  const { state } = useContext(MainContext);
-  const currentTheme = state.theme;
+  const currentTheme = useTheme();
   return (
     <View
       style={[

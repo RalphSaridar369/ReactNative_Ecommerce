@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import {
   View,
   Text,
@@ -10,11 +10,10 @@ import {
 } from "react-native";
 import * as DocumentPicker from "expo-document-picker";
 import { AntDesign } from "@expo/vector-icons";
-import { MainContext } from "../reducer/MainContext";
+import useTheme from "../helpers/useTheme";
 
 const DocumentPickerComponent = (props) => {
-  const { state } = useContext(MainContext);
-  const currentTheme = state.theme;
+  const currentTheme = useTheme();
 
   const validateType = (value) => {
     let document = value.split(".");

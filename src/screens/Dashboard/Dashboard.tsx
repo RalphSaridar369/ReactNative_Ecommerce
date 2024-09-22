@@ -3,17 +3,15 @@ import { styles } from "./Styles";
 import { LinearGradient } from "expo-linear-gradient";
 import { Text } from "../../components";
 import { BarChart, LineChart } from "react-native-gifted-charts";
-import { useContext } from "react";
-import { MainContext } from "../../reducer/MainContext";
 import { AppStyles } from "../../../AppStyle";
+import useTheme from "../../helpers/useTheme";
 
 const Dashboard = () => {
   const fill = "rgb(255, 104, 99)";
   const barData = [{ value: 15 }, { value: 30 }, { value: 26 }, { value: 40 }];
   const data = [{ value: 15 }, { value: 30 }, { value: 26 }, { value: 40 }];
 
-  const { state } = useContext(MainContext);
-  const currentTheme = state.theme;
+  const currentTheme = useTheme();
 
   return (
     <LinearGradient

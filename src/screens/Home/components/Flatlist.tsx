@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import {
   View,
   ScrollView,
@@ -7,12 +7,11 @@ import {
   StyleSheet,
 } from "react-native";
 import { HeaderText, Text } from "../../../components";
-import { MainContext } from "../../../reducer/MainContext";
 import { AppStyles } from "../../../../AppStyle";
+import useTheme from "../../../helpers/useTheme";
 
 const FlatlistComponent = (props) => {
-  const { state } = useContext(MainContext);
-  const currentTheme = state.theme;
+  const currentTheme = useTheme();
 
   return (
     <View style={{ flex: 1 }}>

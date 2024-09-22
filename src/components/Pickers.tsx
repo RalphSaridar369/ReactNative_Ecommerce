@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -15,7 +15,7 @@ import HeaderText from "./HeaderText";
 import { TextInputComponent } from "./TextInput";
 import { AntDesign } from "@expo/vector-icons";
 import { AppStyles } from "../../AppStyle";
-import { MainContext } from "../reducer/MainContext";
+import useTheme from "../helpers/useTheme";
 
 const styles2 = StyleSheet.create({
   container: {
@@ -121,8 +121,7 @@ const styles = StyleSheet.create({
 });
 
 export const Normal = (props) => {
-  const { state } = useContext(MainContext);
-  const currentTheme = state.theme;
+  const currentTheme = useTheme();
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState("");
   return (

@@ -1,17 +1,16 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { View, StyleSheet, Dimensions, Platform } from "react-native";
 import { TextInput } from "react-native-paper";
 import { MaterialIcons } from "@expo/vector-icons";
-import { MainContext } from "../reducer/MainContext";
 import { AppStyles } from "../../AppStyle";
+import useTheme from "../helpers/useTheme";
 
 export const TextInputComponent = ({
   left = null,
   right = null,
   ...props
 }: any) => {
-  const { state } = useContext(MainContext);
-  const currentTheme = state.theme;
+  const currentTheme = useTheme();
 
   return (
     <View style={[styles.container, props.containerStyle]}>
@@ -77,8 +76,7 @@ export const PassInputComponent = ({
   right = null,
   ...props
 }: any) => {
-  const { state } = useContext(MainContext);
-  const currentTheme = state.theme;
+  const currentTheme = useTheme();
   const [show, setShow] = useState(false);
   return (
     <View style={styles.container}>

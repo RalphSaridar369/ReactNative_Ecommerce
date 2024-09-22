@@ -1,11 +1,9 @@
 import { View, Text, StyleSheet } from "react-native";
 import Checkbox from "expo-checkbox";
-import { useContext } from "react";
-import { MainContext } from "../reducer/MainContext";
+import useTheme from "../helpers/useTheme";
 
 const CheckBoxComponent = (props) => {
-  const { state } = useContext(MainContext);
-  const currentTheme = state.theme;
+  const currentTheme = useTheme();
 
   return (
     <View

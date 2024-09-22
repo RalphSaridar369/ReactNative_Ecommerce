@@ -1,11 +1,9 @@
 import { RadioButton } from "react-native-paper";
 import { View, Text, StyleSheet } from "react-native";
-import { MainContext } from "../reducer/MainContext";
-import { useContext } from "react";
+import useTheme from "../helpers/useTheme";
 
 const RadioButtonG = ({ items, ...props }) => {
-  const { state } = useContext(MainContext);
-  const currentTheme = state.theme;
+  const currentTheme = useTheme();
 
   return (
     <RadioButton.Group
