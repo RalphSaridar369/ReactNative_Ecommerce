@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   View,
   Text,
@@ -14,6 +14,8 @@ import {
 import HeaderText from "./HeaderText";
 import { TextInputComponent } from "./TextInput";
 import { AntDesign } from "@expo/vector-icons";
+import { AppStyles } from "../../AppStyle";
+import { MainContext } from "../reducer/MainContext";
 
 const styles2 = StyleSheet.create({
   container: {
@@ -23,7 +25,6 @@ const styles2 = StyleSheet.create({
     width: "100%",
   },
   dropdown: {
-    backgroundColor: "white",
     borderColor: "gray",
     borderWidth: Platform.OS === "ios" ? 0 : 1,
     borderBottomWidth: Platform.OS === "ios" ? 0.5 : 1,
@@ -120,18 +121,14 @@ const styles = StyleSheet.create({
 });
 
 export const Normal = (props) => {
-  // let {items,...rest} = props;
-  // useEffect(()=>{
-  //   BackHandler.addEventListener('hardwareBackPress', function () {
-  //     setOpen(!open)
-  //   })
-  // },[])
+  const { state } = useContext(MainContext);
+  const currentTheme = state.theme;
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState("");
   return (
     <SafeAreaView style={[styles2.dropdown]}>
       <TouchableOpacity onPress={() => setOpen(!open)}>
-        <Text>
+        <Text style={{ color: currentTheme === "dark" ? "#fff" : "black" }}>
           {props?.value
             ? props?.items?.filter((item) => item.id == props.value)[0]?.name
             : props.label}
@@ -145,7 +142,14 @@ export const Normal = (props) => {
           onDismiss={() => setOpen(false)}
           onRequestClose={() => setOpen(false)}
         >
-          <View style={{ padding: 20, flex: 1 }}>
+          <View
+            style={{
+              padding: 20,
+              flex: 1,
+              backgroundColor:
+                currentTheme === "dark" ? AppStyles.dark_color_2.color : "#fff",
+            }}
+          >
             <View style={styles.headerContainer}>
               <HeaderText style={{ marginVertical: 0, marginTop: 0 }}>
                 {props.label}
@@ -181,7 +185,12 @@ export const Normal = (props) => {
                   >
                     <Text
                       style={{
-                        color: item.id === props.value ? "#FF6863" : "black",
+                        color:
+                          item.id === props.value
+                            ? "#FF6863"
+                            : currentTheme === "dark"
+                            ? "#fff"
+                            : "black",
                         fontSize: 16,
                       }}
                     >

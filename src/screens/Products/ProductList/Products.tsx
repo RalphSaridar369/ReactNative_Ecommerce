@@ -1,4 +1,4 @@
-import React, { memo, useState, useRef, useCallback } from "react";
+import React, { memo, useState, useRef, useCallback, useContext } from "react";
 import { View, TouchableOpacity, FlatList, Image } from "react-native";
 import { brands, categories, products } from "../../../mockData";
 import Header from "./components/Header";
@@ -8,8 +8,13 @@ import { HeaderText, Text } from "../../../components";
 import { Normal } from "../../../components/Pickers";
 import { useFocusEffect } from "@react-navigation/native";
 import { AntDesign } from "@expo/vector-icons";
+import { MainContext } from "../../../reducer/MainContext";
+import { AppStyles } from "../../../../AppStyle";
 
 const Products = (props) => {
+  const { state } = useContext(MainContext);
+  const currentTheme = state.theme;
+
   const filterRef = useRef<any>(null);
   const sortRef = useRef<any>(null);
 
@@ -103,7 +108,13 @@ const Products = (props) => {
   const _renderItem = ({ item }: { item: any }) => {
     return (
       <TouchableOpacity
-        style={styles.card}
+        style={[
+          styles.card,
+          {
+            backgroundColor:
+              currentTheme === "dark" ? AppStyles.dark_color_2.color : "#fff",
+          },
+        ]}
         onPress={() =>
           props.navigation.navigate("productDetails", { product: item })
         }
@@ -121,7 +132,15 @@ const Products = (props) => {
   };
 
   return (
-    <View style={styles.main}>
+    <View
+      style={[
+        styles.main,
+        {
+          backgroundColor:
+            currentTheme === "dark" ? AppStyles.dark_color.color : "#fff",
+        },
+      ]}
+    >
       <Header search={search} onChangeText={(e) => setSearch(e)} show={show} />
 
       <View style={styles.flatlist_container}>
@@ -136,7 +155,13 @@ const Products = (props) => {
           renderItem={_renderItem}
         />
       </View>
-      <ActionSheet ref={filterRef}>
+      <ActionSheet
+        ref={filterRef}
+        containerStyle={{
+          backgroundColor:
+            currentTheme === "dark" ? AppStyles.dark_color_2.color : "#fff",
+        }}
+      >
         <View style={styles.filter_by}>
           <HeaderText style={styles.filter_by_header}>Filter By</HeaderText>
           <TouchableOpacity onPress={resetFilter}>
@@ -163,27 +188,92 @@ const Products = (props) => {
         </View>
       </ActionSheet>
       <ActionSheet ref={sortRef}>
-        <View style={styles.filter_by}>
+        <View
+          style={[
+            styles.filter_by,
+            {
+              backgroundColor:
+                currentTheme === "dark" ? AppStyles.dark_color.color : "#fff",
+            },
+          ]}
+        >
           <HeaderText style={styles.filter_by_header}>Sort By</HeaderText>
           <HeaderText style={[styles.filter_by_header, styles.filter_by_value]}>
             {sortedBy}
           </HeaderText>
         </View>
-        <View style={styles.sort_container}>
+        <View
+          style={[
+            styles.sort_container,
+            {
+              backgroundColor:
+                currentTheme === "dark" ? AppStyles.dark_color.color : "#fff",
+            },
+          ]}
+        >
           <TouchableOpacity
-            style={styles.icon}
+            style={[
+              styles.icon,
+              {
+                borderColor:
+                  currentTheme === "dark"
+                    ? "#fff"
+                    : AppStyles.light_color.color,
+              },
+            ]}
             onPress={() => sortData("high")}
           >
             <Text style={styles.icon_text}>$$</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.icon} onPress={() => sortData("low")}>
+          <TouchableOpacity
+            style={[
+              styles.icon,
+              {
+                borderColor:
+                  currentTheme === "dark"
+                    ? "#fff"
+                    : AppStyles.light_color.color,
+              },
+            ]}
+            onPress={() => sortData("low")}
+          >
             <Text style={styles.icon_text}>$</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.icon} onPress={() => sortData("Z-A")}>
-            <AntDesign name="caretup" size={24} color="#FF6863" />
+          <TouchableOpacity
+            style={[
+              styles.icon,
+              {
+                borderColor:
+                  currentTheme === "dark"
+                    ? "#fff"
+                    : AppStyles.light_color.color,
+              },
+            ]}
+            onPress={() => sortData("Z-A")}
+          >
+            <AntDesign
+              name="caretup"
+              size={24}
+              color={currentTheme === "dark" ? "#fff" : "#FF6863"}
+            />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.icon} onPress={() => sortData("A-Z")}>
-            <AntDesign name="caretdown" size={24} color="#FF6863" />
+          <TouchableOpacity
+            style={[
+              styles.icon,
+              {
+                borderColor:
+                  currentTheme === "dark"
+                    ? "#fff"
+                    : AppStyles.light_color.color,
+              },
+            ]}
+            onPress={() => sortData("A-Z")}
+          >
+            <AntDesign
+              name="caretdown"
+              size={24}
+              color={currentTheme === "dark" ? "#fff" : "#FF6863"}
+            />
           </TouchableOpacity>
         </View>
       </ActionSheet>

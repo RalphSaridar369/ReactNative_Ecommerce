@@ -99,7 +99,7 @@ const Register = ({ navigation }) => {
             {
               backgroundColor:
                 currentTheme === "dark"
-                  ? "#2A3E56"
+                  ? "AppStyles.dark_color_2.color"
                   : AppStyles.light_color.color,
             },
           ]}

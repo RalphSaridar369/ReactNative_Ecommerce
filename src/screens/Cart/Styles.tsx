@@ -3,7 +3,6 @@ import { StyleSheet, Dimensions } from "react-native";
 let screenWidth = Dimensions.get("screen").width;
 export const styles = StyleSheet.create({
   total: {
-    backgroundColor: "#FF6863",
     paddingVertical: 5,
     paddingHorizontal: 20,
     display: "flex",

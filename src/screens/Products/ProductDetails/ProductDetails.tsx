@@ -5,6 +5,7 @@ import { MainContext } from "../../../reducer/MainContext";
 import CartButtons from "./components/CartButtons";
 import { styles } from "./Styles";
 import { useIsFocused } from "@react-navigation/native";
+import { AppStyles } from "../../../../AppStyle";
 
 interface IProduct {
   image: number;
@@ -52,7 +53,15 @@ const ProductDetails = ({ route }) => {
     setCount(type == "add" ? count + 1 : count != 0 ? count - 1 : 0);
   };
   return (
-    <View style={styles.main}>
+    <View
+      style={[
+        styles.main,
+        {
+          backgroundColor:
+            state.theme === "dark" ? AppStyles.dark_color.color : "#fff",
+        },
+      ]}
+    >
       {product && (
         <ScrollView>
           <Image

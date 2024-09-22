@@ -5,6 +5,7 @@ import ScrollViewComponent from "./components/ScrollView";
 import { styles } from "./Styles";
 import { HeaderText, Text } from "../../components";
 import { useFocusEffect } from "@react-navigation/native";
+import { AppStyles } from "../../../AppStyle";
 
 const Cart = () => {
   const { state, dispatch } = useContext(MainContext);
@@ -29,11 +30,27 @@ const Cart = () => {
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    <View
+      style={{
+        flex: 1,
+        backgroundColor:
+          state.theme === "dark" ? AppStyles.dark_color.color : "#fff",
+      }}
+    >
       {state.cart.length > 0 && (
         <ScrollViewComponent data={state.cart} removeProduct={removeProduct} />
       )}
-      <View style={styles.total}>
+      <View
+        style={[
+          styles.total,
+          {
+            backgroundColor:
+              state.theme === "dark"
+                ? AppStyles.dark_color_2.color
+                : AppStyles.light_color.color,
+          },
+        ]}
+      >
         <HeaderText style={styles.total_label}>Total</HeaderText>
         <Text style={styles.total_value}>
           ${state.cart.length > 0 ? calculateTotal() : 0}

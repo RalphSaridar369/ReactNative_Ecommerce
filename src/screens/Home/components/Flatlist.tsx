@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import { HeaderText, Text } from "../../../components";
 import { MainContext } from "../../../reducer/MainContext";
+import { AppStyles } from "../../../../AppStyle";
 
 const FlatlistComponent = (props) => {
   const { state } = useContext(MainContext);
@@ -23,7 +24,10 @@ const FlatlistComponent = (props) => {
             style={[
               styles.product_image_container,
               {
-                backgroundColor: currentTheme === "dark" ? "#2A3E56" : "#fff",
+                backgroundColor:
+                  currentTheme === "dark"
+                    ? AppStyles.dark_color_2.color
+                    : "#fff",
               },
             ]}
             onPress={() =>

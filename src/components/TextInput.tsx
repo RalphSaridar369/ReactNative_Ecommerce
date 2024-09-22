@@ -1,19 +1,26 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { View, StyleSheet, Dimensions, Platform } from "react-native";
 import { TextInput } from "react-native-paper";
 import { MaterialIcons } from "@expo/vector-icons";
+import { MainContext } from "../reducer/MainContext";
+import { AppStyles } from "../../AppStyle";
 
 export const TextInputComponent = ({
   left = null,
   right = null,
   ...props
 }: any) => {
+  const { state } = useContext(MainContext);
+  const currentTheme = state.theme;
+
   return (
     <View style={[styles.container, props.containerStyle]}>
       <TextInput
         {...props}
         autoComplete="off"
-        activeOutlineColor="#FF6863"
+        activeOutlineColor={
+          currentTheme === "dark" ? AppStyles.dark_color.color : "#FF6863"
+        }
         selectionColor="#FF6863"
         activeUnderlineColor="#FF6863"
         mode={
@@ -70,12 +77,16 @@ export const PassInputComponent = ({
   right = null,
   ...props
 }: any) => {
+  const { state } = useContext(MainContext);
+  const currentTheme = state.theme;
   const [show, setShow] = useState(false);
   return (
     <View style={styles.container}>
       <TextInput
         {...props}
-        activeOutlineColor="#FF6863"
+        activeOutlineColor={
+          currentTheme === "dark" ? AppStyles.dark_color.color : "#FF6863"
+        }
         selectionColor="#FF6863"
         activeUnderlineColor="#FF6863"
         secureTextEntry={show}

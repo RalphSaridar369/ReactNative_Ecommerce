@@ -28,6 +28,9 @@ export const AppStyles = StyleSheet.create({
   dark_color: {
     color: "#1A2B40",
   },
+  dark_color_2: {
+    color: "#2A3E56",
+  },
   light_color: {
     color: "#FF6863",
   },
