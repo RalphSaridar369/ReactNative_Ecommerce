@@ -12,6 +12,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   Platform,
+  StatusBar,
 } from "react-native";
 
 import { getData } from "./src/helpers/asyncStorage";
@@ -27,7 +28,7 @@ import { MainContext, initialState } from "./src/reducer/MainContext";
 import mainReducer from "./src/reducer/MainReducer";
 import Cart from "./src/screens/Cart/Cart";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-// import Dashboard from "./src/screens/Dashboard/Dashboard";
+import Dashboard from "./src/screens/Dashboard/Dashboard";
 const DrawerStack = createDrawerNavigator();
 
 SplashScreen.preventAutoHideAsync();
@@ -92,6 +93,7 @@ export default function App() {
       <>
         <MainContext.Provider value={{ state, dispatch }}>
           <NavigationContainer>
+            <StatusBar barStyle="light-content" backgroundColor="#FF6863" />
             <DrawerStack.Navigator
               drawerContent={(props) => (
                 <CustomDrawer
@@ -186,7 +188,7 @@ export default function App() {
                   ),
                 }}
               />
-              {/* <DrawerStack.Screen
+              <DrawerStack.Screen
                 name="Dashboard"
                 component={Dashboard}
                 options={{
@@ -194,7 +196,7 @@ export default function App() {
                     <Header title="Dashboard" LoggedIn={state?.LoggedIn} />
                   ),
                 }}
-              /> */}
+              />
             </DrawerStack.Navigator>
           </NavigationContainer>
         </MainContext.Provider>
