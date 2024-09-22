@@ -1,8 +1,22 @@
 import { StyleSheet, Text, Platform } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
+import { MainContext } from "../reducer/MainContext";
 
 const HeaderText = (props) => {
-  return <Text style={[styles.text, props.style]}>{props.children}</Text>;
+  const { state } = useContext(MainContext);
+  const currentTheme = state.theme;
+
+  return (
+    <Text
+      style={[
+        styles.text,
+        props.style,
+        { color: currentTheme === "dark" ? "white" : "black" },
+      ]}
+    >
+      {props.children}
+    </Text>
+  );
 };
 
 const styles = StyleSheet.create({

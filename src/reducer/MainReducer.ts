@@ -3,6 +3,11 @@ import { clearAll, storeData } from "../helpers/asyncStorage";
 
 const mainReducer = (state, action) => {
   switch (action.type) {
+    case "TOGGLE_THEME":
+      return {
+        ...state,
+        theme: state.theme === "light" ? "dark" : "light",
+      };
     case "SIGN_IN":
       storeData("user", action.payload.UserData);
       return { ...state, UserData: action.payload.UserData, LoggedIn: true };

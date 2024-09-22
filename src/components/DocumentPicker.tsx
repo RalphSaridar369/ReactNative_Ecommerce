@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   View,
   Text,
@@ -10,8 +10,12 @@ import {
 } from "react-native";
 import * as DocumentPicker from "expo-document-picker";
 import { AntDesign } from "@expo/vector-icons";
+import { MainContext } from "../reducer/MainContext";
 
 const DocumentPickerComponent = (props) => {
+  const { state } = useContext(MainContext);
+  const currentTheme = state.theme;
+
   const validateType = (value) => {
     let document = value.split(".");
     let extension = document[document.length - 1];
@@ -48,7 +52,9 @@ const DocumentPickerComponent = (props) => {
       onPress={() => pickDocument()}
     >
       {props.leftIcon && <View>{props.leftIcon.icon}</View>}
-      <Text>{props.text}</Text>
+      <Text style={{ color: currentTheme === "dark" ? "#fff" : "black" }}>
+        {props.text}
+      </Text>
       <View>
         {props.rightIcon ? (
           props.rightIcon.icon

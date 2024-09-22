@@ -1,10 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import { ScrollView, View, StyleSheet } from "react-native";
 import { HeaderText, Text } from "../../components";
+import { MainContext } from "../../reducer/MainContext";
+import { AppStyles } from "../../../AppStyle";
 
 const About = () => {
+  const { state } = useContext(MainContext);
+  const currentTheme = state.theme;
+
   return (
-    <View style={{ flex: 1 }}>
+    <View
+      style={{
+        flex: 1,
+        backgroundColor:
+          currentTheme === "dark" ? AppStyles.dark_color.color : "#fff",
+      }}
+    >
       <ScrollView>
         <View style={styles.header_text_container}>
           <HeaderText style={styles.header_text}>About</HeaderText>

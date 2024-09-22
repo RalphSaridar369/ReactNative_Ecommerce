@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useContext, useState } from "react";
 import { View, ScrollView, Alert } from "react-native";
 import { formValidator } from "../../../helpers/formValidator";
 import {
@@ -13,8 +13,13 @@ import { styles } from "./Styles";
 import { useFocusEffect } from "@react-navigation/native";
 import { brands, categories } from "../../../mockData";
 import { documentBlobConverter } from "../../../helpers/blobConverter";
+import { MainContext } from "../../../reducer/MainContext";
+import { AppStyles } from "../../../../AppStyle";
 
 const Register = ({ navigation }) => {
+  const { state } = useContext(MainContext);
+  const currentTheme = state.theme;
+
   const [userCred, setUserCred] = useState({
     email: "",
     password: "",
@@ -76,9 +81,29 @@ const Register = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.login_container}>
+    <View
+      style={[
+        styles.login_container,
+        {
+          backgroundColor:
+            currentTheme === "dark"
+              ? AppStyles.dark_color.color
+              : AppStyles.light_color.color,
+        },
+      ]}
+    >
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.card}>
+        <View
+          style={[
+            styles.card,
+            {
+              backgroundColor:
+                currentTheme === "dark"
+                  ? "#2A3E56"
+                  : AppStyles.light_color.color,
+            },
+          ]}
+        >
           <RadioButton
             containerStyle={styles.radiobutton_container}
             value={userType}

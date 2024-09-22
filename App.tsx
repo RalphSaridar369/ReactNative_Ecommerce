@@ -29,6 +29,7 @@ import mainReducer from "./src/reducer/MainReducer";
 import Cart from "./src/screens/Cart/Cart";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import Dashboard from "./src/screens/Dashboard/Dashboard";
+import { AppStyles } from "./AppStyle";
 const DrawerStack = createDrawerNavigator();
 
 SplashScreen.preventAutoHideAsync();
@@ -93,7 +94,14 @@ export default function App() {
       <>
         <MainContext.Provider value={{ state, dispatch }}>
           <NavigationContainer>
-            <StatusBar barStyle="light-content" backgroundColor="#FF6863" />
+            <StatusBar
+              barStyle="light-content"
+              backgroundColor={
+                state.theme === "dark"
+                  ? AppStyles.dark_color.color
+                  : AppStyles.light_color.color
+              }
+            />
             <DrawerStack.Navigator
               drawerContent={(props) => (
                 <CustomDrawer
@@ -104,7 +112,12 @@ export default function App() {
               )}
               screenOptions={({ navigation }) => ({
                 swipeEnabled: Platform.OS != "ios" ? true : false,
-                headerStyle: { backgroundColor: "#FF6863" },
+                headerStyle: {
+                  backgroundColor:
+                    state.theme === "dark"
+                      ? AppStyles.dark_color.color
+                      : AppStyles.light_color.color,
+                },
                 headerLeft: (props) => (
                   <TouchableOpacity
                     style={{ marginHorizontal: 20 }}

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { styles } from "../../AppStyle";
+import { AppStyles } from "../../AppStyle";
 import { View, Image } from "react-native";
 import { Text } from "../components";
 import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
@@ -15,38 +15,51 @@ const CustomItem = (props) => {
       icon={props.icon}
       activeBackgroundColor="transparent"
       activeTintColor="#FF6863"
-      inactiveTintColor="black"
+      inactiveTintColor={props.theme === "dark" ? "white" : "black"}
     />
   );
 };
 
 export const CustomDrawer = (props) => {
   const { state, dispatch } = useContext(MainContext);
+
   const clickLogout = () => {
     dispatch({ type: "SIGN_OUT" });
   };
+
+  const toggleTheme = () => {
+    dispatch({ type: "TOGGLE_THEME" });
+  };
+
   return (
-    <DrawerContentScrollView {...props} showsVerticalScrollIndicator={false}>
-      <View style={styles.logo_img_container}>
+    <DrawerContentScrollView
+      {...props}
+      showsVerticalScrollIndicator={false}
+      style={{
+        backgroundColor:
+          state.theme === "dark" ? AppStyles.dark_color.color : "white",
+      }}
+    >
+      <View style={AppStyles.logo_img_container}>
         <Image
           source={require("../../assets/logo.png")}
-          style={styles.logo_img}
+          style={AppStyles.logo_img}
           resizeMode="cover"
         />
       </View>
       {state.LoggedIn && (
-        <View style={styles.loggedin_container}>
-          <Text style={styles.usertype}>
+        <View style={AppStyles.loggedin_container}>
+          <Text style={AppStyles.usertype}>
             {state?.UserData?.usertype == 1 ? "Buyer" : "Seller"}
           </Text>
-          <Text style={styles.loggedin_text}>
-            <Text style={styles.logged_inner_text}>Logged in as</Text>{" "}
+          <Text style={AppStyles.loggedin_text}>
+            <Text style={AppStyles.logged_inner_text}>Logged in as</Text>{" "}
             {state?.UserData?.email}
           </Text>
         </View>
       )}
-      {/* <DrawerItemList {...props}/> */}
       <CustomItem
+        theme={state.theme}
         label="Home"
         onPress={() => {
           props.navigation.navigate("Home");
@@ -55,13 +68,32 @@ export const CustomDrawer = (props) => {
           <MaterialCommunityIcons
             name="home-outline"
             size={28}
-            color={focused ? "#FF6863" : "black"}
+            color={state.theme === "dark" ? "white" : "black"}
+          />
+        )}
+      />
+      <CustomItem
+        theme={state.theme}
+        label={
+          state.theme === "dark"
+            ? "Switch to Light Mode"
+            : "Switch to Dark Mode"
+        }
+        onPress={() => {
+          toggleTheme();
+        }}
+        icon={({ focused, color, size }) => (
+          <MaterialCommunityIcons
+            name={state.theme === "dark" ? "lightbulb" : "lightbulb-outline"}
+            size={28}
+            color={state.theme === "dark" ? "white" : "black"}
           />
         )}
       />
       {props.LoggedIn &&
         (props.UserData.usertype == 1 ? (
           <CustomItem
+            theme={state.theme}
             label="Cart"
             onPress={() => {
               props.navigation.navigate("Cart");
@@ -70,12 +102,13 @@ export const CustomDrawer = (props) => {
               <MaterialCommunityIcons
                 name="cart-outline"
                 size={28}
-                color="black"
+                color={state.theme === "dark" ? "white" : "black"}
               />
             )}
           />
         ) : (
           <CustomItem
+            theme={state.theme}
             label="Dashboard"
             onPress={() => {
               props.navigation.navigate("Dashboard");
@@ -84,23 +117,29 @@ export const CustomDrawer = (props) => {
               <MaterialCommunityIcons
                 name="view-dashboard-outline"
                 size={28}
-                color="black"
+                color={state.theme === "dark" ? "white" : "black"}
               />
             )}
           />
         ))}
       {props.LoggedIn && (
         <CustomItem
+          theme={state.theme}
           label="Products"
           onPress={() => {
             props.navigation.navigate("Products", { screen: "products" });
           }}
           icon={({ focused, color, size }) => (
-            <Feather name="box" size={28} color="black" />
+            <Feather
+              name="box"
+              size={28}
+              color={state.theme === "dark" ? "white" : "black"}
+            />
           )}
         />
       )}
       <CustomItem
+        theme={state.theme}
         label="About"
         onPress={() => {
           props.navigation.navigate("About");
@@ -109,11 +148,12 @@ export const CustomDrawer = (props) => {
           <MaterialCommunityIcons
             name="head-question-outline"
             size={28}
-            color="black"
+            color={state.theme === "dark" ? "white" : "black"}
           />
         )}
       />
       <CustomItem
+        theme={state.theme}
         label={props.LoggedIn ? "Logout" : "Login"}
         onPress={() =>
           props.LoggedIn ? clickLogout() : props.navigation.navigate("Auth")
@@ -122,7 +162,7 @@ export const CustomDrawer = (props) => {
           <MaterialCommunityIcons
             name={props.LoggedIn ? "logout" : "login"}
             size={28}
-            color="black"
+            color={state.theme === "dark" ? "white" : "black"}
           />
         )}
       />

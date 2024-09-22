@@ -1,4 +1,5 @@
 import { createContext, Dispatch } from "react";
+import { Appearance } from "react-native";
 
 interface UserData {
   usertype: number;
@@ -10,6 +11,7 @@ interface State {
   Usertoken: string | null;
   UserData: UserData | null;
   cart: any[];
+  theme: "light" | "dark";
 }
 
 export const initialState: State = {
@@ -17,6 +19,7 @@ export const initialState: State = {
   Usertoken: null,
   UserData: null,
   cart: [],
+  theme: Appearance.getColorScheme() === "dark" ? "dark" : "light",
 };
 
 type MainContextType = {

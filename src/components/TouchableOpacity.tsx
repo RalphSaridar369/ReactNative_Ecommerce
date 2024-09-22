@@ -1,15 +1,33 @@
 import { Text, TouchableOpacity, StyleSheet } from "react-native";
+import { MainContext } from "../reducer/MainContext";
+import { useContext } from "react";
+import { AppStyles } from "../../AppStyle";
 
 const TouchableOpacityComponent = (props) => {
   const chosenStyles = props.settings.map((item) => styles[item]);
+
+  const { state } = useContext(MainContext);
+  const currentTheme = state.theme;
+
   return (
     <TouchableOpacity
       onPress={() => props.onPress()}
-      style={[chosenStyles, styles.base, props.style]}
+      style={[
+        chosenStyles,
+        styles.base,
+        props.style,
+        {
+          borderColor:
+            currentTheme === "dark" ? "#fff" : AppStyles.light_color.color,
+        },
+      ]}
     >
       <Text
         style={{
-          color: props.settings.includes("outlined") ? "#FF6863" : "white",
+          color:
+            props.settings.includes("outlined") && currentTheme === "light"
+              ? "#FF6863"
+              : "white",
           fontFamily: "OpenSans-Medium",
           fontSize: 20,
         }}

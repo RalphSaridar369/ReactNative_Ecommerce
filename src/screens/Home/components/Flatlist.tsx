@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   View,
   ScrollView,
@@ -7,8 +7,12 @@ import {
   StyleSheet,
 } from "react-native";
 import { HeaderText, Text } from "../../../components";
+import { MainContext } from "../../../reducer/MainContext";
 
 const FlatlistComponent = (props) => {
+  const { state } = useContext(MainContext);
+  const currentTheme = state.theme;
+
   return (
     <View style={{ flex: 1 }}>
       <HeaderText style={styles.header_text}>{props.headerText}</HeaderText>
@@ -16,7 +20,12 @@ const FlatlistComponent = (props) => {
         {props.data.map((item, index) => (
           <TouchableOpacity
             key={index}
-            style={styles.product_image_container}
+            style={[
+              styles.product_image_container,
+              {
+                backgroundColor: currentTheme === "dark" ? "#2A3E56" : "#fff",
+              },
+            ]}
             onPress={() =>
               props.navigation.navigate("Products", {
                 screen: "productDetails",
@@ -48,7 +57,6 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     marginHorizontal: 10,
-    backgroundColor: "#fff",
     borderWidth: 0.5,
     borderColor: "lightgray",
     borderRadius: 20,

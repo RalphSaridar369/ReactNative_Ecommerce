@@ -1,15 +1,26 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, ScrollView } from "react-native";
-// import CarouselComponent from "./components/Carousel";
 import { carouselData, flatList1, flatList2, flatList3 } from "../../mockData";
 import FlatlistComponent from "./components/Flatlist";
-// import CarouselComponent from "./components/Carousel";
+import CarouselComponent from "./components/Carousel";
+import { MainContext } from "../../reducer/MainContext";
+import { AppStyles } from "../../../AppStyle";
 
 const Home = ({ navigation }) => {
+  const { state } = useContext(MainContext);
+  const currentTheme = state.theme;
+
   return (
-    <View style={{ flex: 1, backgroundColor: "#fff", paddingBottom: 20 }}>
+    <View
+      style={{
+        flex: 1,
+        backgroundColor:
+          currentTheme === "dark" ? AppStyles.dark_color.color : "#fff",
+        paddingBottom: 20,
+      }}
+    >
       <ScrollView>
-        {/* <CarouselComponent data={carouselData} loop={true} autoplay={true} /> */}
+        <CarouselComponent data={carouselData} />
         <View style={{ marginTop: 20 }}>
           <FlatlistComponent
             headerText="Top Products"

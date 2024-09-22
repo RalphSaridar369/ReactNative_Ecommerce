@@ -14,6 +14,7 @@ import { styles } from "./Styles";
 import { storeData, removeKey, getData } from "../../../helpers/asyncStorage";
 import { emptyString } from "../../../helpers/emptyString";
 import { LinearGradient } from "expo-linear-gradient";
+import { AppStyles } from "../../../../AppStyle";
 
 const Login = ({ navigation }) => {
   const { state, dispatch } = useContext(MainContext);
@@ -75,7 +76,11 @@ const Login = ({ navigation }) => {
   return (
     <LinearGradient
       // Background Linear Gradient
-      colors={["#FF6863", "#fff", "#fff"]}
+      colors={
+        state.theme === "dark"
+          ? [AppStyles.dark_color.color, AppStyles.dark_color.color]
+          : ["#FF6863", "#fff", "#fff"]
+      }
       style={{ flex: 1 }}
     >
       <KeyboardAvoidingView>
