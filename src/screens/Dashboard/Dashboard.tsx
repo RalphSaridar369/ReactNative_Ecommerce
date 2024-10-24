@@ -5,8 +5,10 @@ import { Text } from "../../components";
 import { BarChart, LineChart } from "react-native-gifted-charts";
 import { AppStyles } from "../../../AppStyle";
 import useTheme from "../../helpers/useTheme";
+import { useState } from "react";
 
 const Dashboard = () => {
+  const [cardWidth, setCardWidth] = useState(0);
   const fill = "rgb(255, 104, 99)";
   const barData = [{ value: 15 }, { value: 30 }, { value: 26 }, { value: 40 }];
   const data = [{ value: 15 }, { value: 30 }, { value: 26 }, { value: 40 }];
@@ -36,9 +38,15 @@ const Dashboard = () => {
                   : "#fff",
             },
           ]}
+          onLayout={(event) => {
+            const { width } = event.nativeEvent.layout;
+            setCardWidth(width); // Set the width of the first View
+          }}
         >
           <Text style={styles.card_header}>Sales</Text>
           <BarChart
+            adjustToWidth
+            width={cardWidth - 100}
             data={barData}
             frontColor={fill}
             yAxisTextStyle={{
@@ -61,6 +69,8 @@ const Dashboard = () => {
         >
           <Text style={styles.card_header}>Sales per week</Text>
           <LineChart
+            width={cardWidth - 100}
+            adjustToWidth
             data={data}
             color={fill}
             dataPointsColor={"red"}
